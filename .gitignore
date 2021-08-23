@@ -2,5 +2,5 @@
 .RData
 .Ruserdata
 .Rproj.user
-.Rproj
+*.Rproj
 *_template.R
