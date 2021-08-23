@@ -1,2 +1,7 @@
-<H1><p align="center"> #TidyTuesday </p></H1>
-<p align="center">My contributions to the #TidyTuesday challenge</p>
+<h1 align="center">
+  #TidyTuesday
+</h1>
+***
+<p align="center">
+My contributions to the #TidyTuesday challenge
+</p>
