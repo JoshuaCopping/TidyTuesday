@@ -1,3 +1,2 @@
-<center> <h1>\#TidyTuesday</h1> </center>
-
-My contributions to the \#TidyTuesday challenge
+<H1><p align="center"> \#TidyTuesday </p></H1>
+<p align="center">My contributions to the \#TidyTuesday challenge</p>

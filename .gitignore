@@ -3,4 +3,5 @@
 .Ruserdata
 .Rproj.user
 *.Rproj
+*.html
 *_template.R
