@@ -3,7 +3,7 @@
 </h1>
 
 <div align="center">
-My contributions to the [#TidyTuesday](https://github.com/rfordatascience/tidytuesday) challenge, a weekly social data project in R that focuses on understanding how to wrangle, summarise and arrange data to produce meaningful and (hopefully) beautiful data visualisations using tools in the [`{tidyverse}`](https://www.tidyverse.org/) ecosystem.
+My contributions to the [#TidyTuesday](https://github.com/rfordatascience/tidytuesday) challenge, a weekly social data project in R that focuses on understanding how to wrangle, summarise and arrange data to produce meaningful and (hopefully) beautiful data visualisations using tools from the [`{tidyverse}`](https://www.tidyverse.org/) ecosystem.
 
 &nbsp;
 
