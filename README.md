@@ -21,12 +21,21 @@ My contributions to the [#TidyTuesday](https://github.com/rfordatascience/tidytu
 
 ***
 
-### [2021/32](https://github.com/JoshuaCopping/TidyTuesday/tree/main/2021_35_Lemurs) 🐒 Lemurs
+### [2021/35](https://github.com/JoshuaCopping/TidyTuesday/tree/main/2021_35_Lemurs) 🐒 Lemurs
 ![./2021_35_Lemurs/2021_35_Lemurs.png](https://github.com/JoshuaCopping/TidyTuesday/blob/main/2021_35_Lemurs/2021_35_Lemurs.png?raw=true)
 
 ***
 
-### [2021/31](https://github.com/JoshuaCopping/TidyTuesday/tree/main/2021_32_ParalympicMedals) 🥇 Paralympic Medals
+### [2021/32](https://github.com/JoshuaCopping/TidyTuesday/tree/main/2021_32_ParalympicMedals) 🥇 Paralympic Medals
 ![./2021_32_ParalympicMedals/2021_32_ParalympicMedals.png](https://github.com/JoshuaCopping/TidyTuesday/blob/main/2021_32_ParalympicMedals/2021_32_ParalympicMedals.png?raw=true)
 
 ***
+
+### [2021/31](https://github.com/JoshuaCopping/TidyTuesday/tree/main/2021_31_OlympicMedals) 🥇 Olympic Medals, by [Data.World](https://data.world/kcmillersean/billboard-hot-100-1958-2017#)
+![./2021_38_BillboardTop100/2021_38_BillboardTop100.png](https://github.com/JoshuaCopping/TidyTuesday/blob/main/2021_38_BillboardTop100/2021_38_BillboardTop100.png?raw=true)
+
+***
+
+
+
+
