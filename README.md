@@ -41,3 +41,7 @@ My contributions to the [#TidyTuesday](https://github.com/rfordatascience/tidytu
 
 ***
 
+### [2021/29](https://github.com/JoshuaCopping/TidyTuesday/tree/main/2021_29_ScoobyDoo) 👻 Scooby Doo
+![./2021_29_ScoobyDoo/2021_29_ScoobyDoo.png](https://github.com/JoshuaCopping/TidyTuesday/blob/main/2021_29_ScoobyDoo/2021_29_ScoobyDoo.png?raw=true)
+
+***
