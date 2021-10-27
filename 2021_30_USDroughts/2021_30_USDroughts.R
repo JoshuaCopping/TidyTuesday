@@ -2,14 +2,19 @@
 
 ## Setup ----------
 library(tidyverse)
+library(lubridate)
+library(geofacet)
 library(ggtext)
+library(ggfx)
+library(patchwork)
 
 ## Data ----------
 drought <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-07-20/drought.csv')
 
-drought <- drought %>% 
-  select(-map_date, -stat_fmt) %>%
-  filter(state_abb == "CA") %>% 
+states_drought <- drought %>% 
+  select(-map_date, -stat_fmt) %>% 
+  mutate(year = year(valid_start)) %>% 
+  filter(year == 2020) %>%
   mutate(drought_level = case_when(drought_lvl == "None" ~ "No drought",
                                    drought_lvl == "D0" ~ "Abnormally dry",
                                    drought_lvl == "D1" ~ "Moderate",
@@ -17,63 +22,135 @@ drought <- drought %>%
                                    drought_lvl == "D3" ~ "Extreme",
                                    drought_lvl == "D4" ~ "Exceptional drought"),
          drought_level = factor(drought_level, levels = c("Exceptional drought", "Extreme", "Severe", "Moderate", "Abnormally dry", "No drought"))) %>% 
-  group_by(valid_start) %>%
-  slice_max(area_pct, n = 1, with_ties = FALSE) 
+  filter(state_abb != "PR")
+
+usa_drought <- states_drought %>% 
+  group_by(valid_start, drought_level) %>%
+  summarise(average = mean(area_pct)/100) 
+
+shadow_points <- tibble(
+  state_abb = unique(states_drought$state_abb),
+  date = as.Date("2020-07-04"),
+  pct = 50
+)
+
+label_legend <- tibble(
+  drought_level = unique(usa_drought$drought_level),
+  x = as.Date("2020-12-31"),
+  y = c(0.97, 0.91, 0.84, 0.77, 0.63, 0.35)
+)
 
 ## Plot ----------
-ggplot(drought, 
-       aes(valid_start, 
-           fill = reorder(drought_level, desc(drought_level)))) +
-  geom_bar(width = 10) +
-  scale_x_date(date_breaks = "1 year",
-               date_labels = "%Y",
-               minor_breaks = "1 month",
+# Inspired by the USGS Streamflow cartogram :https://github.com/USGS-VIZLAB/viz-scratch/tree/main/flow_cartogram
+
+state_plot <- 
+  ggplot(data = states_drought) +
+  with_shadow(geom_point(data = shadow_points,
+                         aes(x = date, y = pct),
+                         shape = 15,
+                         size = 27),
+              x_offset = 0,
+              y_offset = 0,
+              sigma = 35,
+              colour = "grey30") +
+  geom_area(data = states_drought,
+            aes(x = valid_start, y = area_pct, 
+                fill = drought_level,
+                colour = drought_level),
+            size = 0.05) +
+  scale_x_date(date_breaks = "1 month",
+               date_labels = "%B",
                expand = c(0, 0)) +
   scale_y_continuous(expand = c(0, 0)) +
-  scale_fill_manual(values = c("grey90", "#FBE6C5", "#F5BA98", "#EE8A82", "#DC7176", "#C8586C")) +
-  ggprism::annotation_ticks(sides = "b",
-                            type = "minor",
-                            outside = TRUE,
-                            lineend = "square",
-                            size = 0.25,
-                            colour = "grey40") +
-  coord_cartesian(clip = "off") +
-  labs(title = "PERIODS OF DROUGHT IN CALIFORNIA",
-       subtitle = "<b style='font-size: 48px'>THE PREDOMINANT DROUGHT CLASSIFICATION PER WEEK, BETWEEN JULY  2001 & JULY  2021</b> <br>
-       <b style='color: #C8586C'>EXCEPTIONAL DROUGHT</b> <b style='color: grey30'>&bull;</b> <b style='color: #DC7176'>EXTREME</b> <b style='color: grey30'>&bull;</b> <b style='color: #EE8A82'>SEVERE</b> <b style='color: grey30'>&bull;</b> <b style='color: #F5BA98'>MODERATE</b> <b style='color: grey30'>&bull;</b> <b style='color: #FBE6C5'>ABNORMALLY DRY</b> <b style='color: grey30'>&bull;</b> <b style='color: grey85'>NO DROUGHT</b> ",
-       caption = "Visualisation: Joshua Copping | Data: US Drought Monitor") +
+  scale_fill_manual(values = c("#C8586C", "#DC7176", "#EE8A82",  "#F5BA98", "#FBE6C5", "grey80"))  +
+  scale_colour_manual(values = c("#C8586C", "#DC7176", "#EE8A82",  "#F5BA98", "#FBE6C5", "grey80")) +
+  coord_fixed(ratio = 3.5,
+              clip = "off") +
+  facet_geo(~state_abb) +
   theme(legend.position = "none",
-        legend.title = element_blank(),
+        axis.text = element_blank(),
         axis.title = element_blank(),
-        axis.ticks.y = element_blank(),
-        axis.text.y = element_blank(),
-        axis.text.x = element_text(angle = 90,
-                                   family = "Roboto",
-                                   face = "bold",
-                                   vjust = 0.5,
-                                   size = 14),
-        plot.title = element_text(size = 64,
-                                  family = "SF Movie Poster",
-                                  face = "bold",
+        axis.ticks = element_blank(),
+        strip.background = element_blank(),
+        strip.text = element_text(family = "Megan June",
+                                  size = 16,
+                                  colour = "grey25",
+                                  margin = margin(0, 0, 2, 0)),
+        plot.margin = margin(10, 30, 30, 10),
+        panel.spacing.x = unit(0.3, "cm"),
+        plot.background = element_rect(fill = "grey95",
+                                       colour = "grey95"))
+
+geofacet_grob <- get_geofacet_grob(state_plot)
+
+usa_plot <- 
+  ggplot() +
+  geom_area(data = usa_drought,
+            aes(x = valid_start, y = average, 
+                fill = drought_level,
+                colour = drought_level),
+            size = 0.05) +
+  geom_text(data = label_legend,
+            aes(x = x, y = y,
+                label = drought_level),
+            hjust = 0,
+            family = "Megan June",
+            size = 7,
+            colour = "grey25") +
+  annotate("text", 
+           x = as.Date("2020-07-01"), y = 1.05,
+           label = "National Average",
+           family = "Megan June",
+           colour = "grey25",
+           size = 7)+
+  scale_x_date(date_breaks = "1 month",
+               date_labels = "%b",
+               limits = as.Date(c("2020-01-01", "2020-12-50")),
+               expand = c(0, 0)) +
+  scale_y_continuous(breaks = c(0.025, 0.5, 0.975),
+                     labels = c("0%", "50%", "100%"),
+                     expand = c(0, 0)) +
+  scale_fill_manual(values = c("#C8586C", "#DC7176", "#EE8A82",  "#F5BA98", "#FBE6C5", "grey80"))  +
+  scale_colour_manual(values = c("#C8586C", "#DC7176", "#EE8A82",  "#F5BA98", "#FBE6C5", "grey80")) +
+  coord_fixed(ratio = 350,
+              clip = "off") +
+  labs(title = "Drought Level\nIn 2020") +
+  theme(legend.position = "none",
+        panel.grid = element_blank(),
+        panel.background = element_blank(),
+        axis.title = element_blank(),
+        axis.ticks = element_blank(),
+        axis.text.x = element_text(family = "Megan June",
+                                   size = 18,
+                                   colour = "grey25",
+                                   angle = 45,
+                                   hjust = 1,
+                                   margin = margin(0, 0, 0, 0)),
+        axis.text.y = element_text(family = "Megan June",
+                                   size = 18,
+                                   colour = "grey25",
+                                   margin = margin(r = 0)),
+        plot.title = element_text(family = "Megan June",
+                                  size = 60,
+                                  colour = "grey10",
+                                  lineheight = 0.8,
                                   hjust = 0.5,
-                                  colour = "grey30",
-                                  margin = margin(10, 10, 20, 10)),
-        plot.subtitle = element_markdown(hjust = 0.5,
-                                         family = "SF Movie Poster",
-                                         size = 32,
-                                         colour = "grey30",
-                                         margin = margin(0, 0, 10, 0)),
-        plot.caption = element_text(hjust = 0.5,
-                                    family = "Roboto Medium",
-                                    size = 10,
-                                    colour = "grey30",
-                                    margin = margin(25, 0, 0, 0)),
-        plot.margin = margin(10, 30, 2, 30))
+                                  margin = margin(0, 0, 0, 0)),
+        plot.margin = margin(50, 160, 120, 30)) 
+
+drought_plot <- usa_plot + geofacet_grob  +
+  plot_layout(ncol = 2, widths = c(1, 3)) +
+  plot_annotation(caption = "Visualisation: Joshua Copping | Data: US Drought Monitor") &
+  theme(plot.caption = element_text(hjust = 0.5,
+                                    family = "Megan June",
+                                    size = 14,
+                                    colour = "grey40"),
+        plot.background = element_rect(fill = "grey95",
+                                       colour = "grey95"))
 
 ## Save ----------
 path <- paste("2021_30_USDroughts")
 ggsave(here::here(path, glue::glue("{path}.png")),
-       width = 16,
-       height = 6,
+       width = 18,
+       height = 10,
        dpi = 300)
-
