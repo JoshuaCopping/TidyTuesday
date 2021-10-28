@@ -1,5 +1,8 @@
 ### TidyTuesday: 2021_29_ScoobyDoo ###
 
+# Inspired by Cédric Scherer's X-Men Plot:
+# https://github.com/Z3tt/TidyTuesday/tree/master/plots/2020_27
+
 ## Setup ----------
 library(tidyverse)
 library(lubridate)

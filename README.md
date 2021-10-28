@@ -11,12 +11,12 @@ My contributions to the [#TidyTuesday](https://github.com/rfordatascience/tidytu
 
 ***
 
-### [2021/39](https://github.com/JoshuaCopping/TidyTuesday/tree/main/2021_39_EmmyAwards) 📺 [Emmy Awards](https://www.emmys.com/)
+### [2021/39](https://github.com/JoshuaCopping/TidyTuesday/tree/main/2021_39_EmmyAwards) 📺 Emmy Awards
 ![./2021_39_EmmyAwards/2021_39_EmmyAwards.png](https://github.com/JoshuaCopping/TidyTuesday/blob/main/2021_39_EmmyAwards/2021_39_EmmyAwards.png?raw=true)
 
 ****
 
-### [2021/38](https://github.com/JoshuaCopping/TidyTuesday/tree/main/2021_38_BillboardTop100) 🎵 Billboard Top 100, by [Data.World](https://data.world/kcmillersean/billboard-hot-100-1958-2017#)
+### [2021/38](https://github.com/JoshuaCopping/TidyTuesday/tree/main/2021_38_BillboardTop100) 🎵 Billboard Top 100
 ![./2021_38_BillboardTop100/2021_38_BillboardTop100.png](https://github.com/JoshuaCopping/TidyTuesday/blob/main/2021_38_BillboardTop100/2021_38_BillboardTop100.png?raw=true)
 
 ***

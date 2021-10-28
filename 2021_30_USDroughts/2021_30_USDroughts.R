@@ -1,5 +1,8 @@
 ### TidyTuesday: 2021_30_USDroughts ###
 
+# Inspired by the USGS Streamflow cartogram:
+# https://github.com/USGS-VIZLAB/viz-scratch/tree/main/flow_cartogram
+
 ## Setup ----------
 library(tidyverse)
 library(lubridate)
@@ -41,7 +44,6 @@ label_legend <- tibble(
 )
 
 ## Plot ----------
-# Inspired by the USGS Streamflow cartogram :https://github.com/USGS-VIZLAB/viz-scratch/tree/main/flow_cartogram
 
 state_plot <- 
   ggplot(data = states_drought) +
@@ -114,7 +116,7 @@ usa_plot <-
   scale_colour_manual(values = c("#C8586C", "#DC7176", "#EE8A82",  "#F5BA98", "#FBE6C5", "grey80")) +
   coord_fixed(ratio = 350,
               clip = "off") +
-  labs(title = "Drought Level\nIn 2020") +
+  labs(title = "2020 USA\nDrought Level") +
   theme(legend.position = "none",
         panel.grid = element_blank(),
         panel.background = element_blank(),
