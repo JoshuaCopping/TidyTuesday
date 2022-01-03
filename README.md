@@ -11,6 +11,10 @@ My contributions to the [#TidyTuesday](https://github.com/rfordatascience/tidytu
 
 ***
 
+### [2021/45](https://github.com/JoshuaCopping/TidyTuesday/tree/main/2021_45_MakingMaps) 🗺️ Making Maps
+![./2021_45_MakingMaps/2021_45_MakingMaps.png](https://github.com/JoshuaCopping/TidyTuesday/blob/main/2021_45_MakingMaps/2021_45_MakingMaps.png?raw=true)
+
+****
 ### [2021/39](https://github.com/JoshuaCopping/TidyTuesday/tree/main/2021_39_EmmyAwards) 📺 Emmy Awards
 ![./2021_39_EmmyAwards/2021_39_EmmyAwards.png](https://github.com/JoshuaCopping/TidyTuesday/blob/main/2021_39_EmmyAwards/2021_39_EmmyAwards.png?raw=true)
 
