@@ -11,6 +11,11 @@ My contributions to the [#TidyTuesday](https://github.com/rfordatascience/tidytu
 
 ***
 
+### [2021/46](https://github.com/JoshuaCopping/TidyTuesday/tree/main/2021_46_AfrilearnData) 🌍 Afrilearn Data
+![./2021_46_AfrilearnData/2021_46_AfrilearnData.png](https://github.com/JoshuaCopping/TidyTuesday/blob/main/2021_46_AfrilearnData/2021_46_AfrilearnData.png?raw=true)
+
+***
+
 ### [2021/45](https://github.com/JoshuaCopping/TidyTuesday/tree/main/2021_45_MakingMaps) 🗺️ Making Maps
 ![./2021_45_MakingMaps/2021_45_MakingMaps.png](https://github.com/JoshuaCopping/TidyTuesday/blob/main/2021_45_MakingMaps/2021_45_MakingMaps.png?raw=true)
 
